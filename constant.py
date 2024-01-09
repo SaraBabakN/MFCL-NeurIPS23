@@ -1,0 +1,7 @@
+MFCL = 'MFCL'
+FedAVG = 'FedAVG'
+FedProx = 'FedProx'
+ORACLE = 'oracle'
+CIFAR100 = 'CIFAR100'
+tinyImageNet = 'tiny_imagenet'
+SuperImageNet = 'super_imagenet'
