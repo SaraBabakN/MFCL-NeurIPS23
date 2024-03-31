@@ -3,7 +3,6 @@ from torch import nn
 import torch.nn.functional as F
 import math
 from tqdm import tqdm
-import wandb
 
 
 class Teacher(nn.Module):
@@ -73,7 +72,6 @@ class Teacher(nn.Module):
         torch.cuda.empty_cache()
         self.generator.train()
         self.generator.to('cuda')
-        name = f'step{len(self.class_idx)}'
         for epoch in tqdm(range(epochs)):
             inputs = self.generator.sample(bs, 'cuda')
             self.gen_opt.zero_grad()
@@ -107,11 +105,6 @@ class Teacher(nn.Module):
                 loss_var = self.mse_loss(inputs, inputs_smooth).mean()
                 noise_loss = self.di_var_scale * loss_var
                 loss += noise_loss
-            wandb.log({f'{name}/bn': bn_loss,
-                       f'{name}/ie': ie_loss,
-                       f'{name}/ce': ce_loss,
-                       f'{name}/noise': noise_loss,
-                       })
             loss.backward()
             self.gen_opt.step()
         torch.cuda.empty_cache()

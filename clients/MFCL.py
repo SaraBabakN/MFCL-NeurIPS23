@@ -8,15 +8,14 @@ from clients.simple import AVG
 from utiles import combine_data
 
 
-class MFCL(AVG):
-    def __init__(self, batch_size, epochs, train_dataset, groups, client_type, kd_weight, ft_weight, syn_size, dataset_name, device):
-        super(MFCL, self).__init__(batch_size, epochs, train_dataset, groups, dataset_name, device)
+class MFCL_client(AVG):
+    def __init__(self, batch_size, epochs, train_dataset, groups, kd_weight, ft_weight, syn_size, dataset_name):
+        super(MFCL_client, self).__init__(batch_size, epochs, train_dataset, groups, dataset_name)
         self.kd_criterion = nn.MSELoss(reduction="none")
         self.last_valid_dim = 0
         self.valid_dim = 0
         self.mu = kd_weight
         self.ft_weight = ft_weight
-        self.client_type = client_type
         self.syn_size = syn_size
 
     def train(self, model, lr, teacher, generator_server, glob_iter_):
