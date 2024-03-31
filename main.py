@@ -89,5 +89,5 @@ for t in range(args.n_tasks):
                 client.valid_dim = classes_learned + task_size
             global_model = original_global
         classes_learned += task_size
-
+        global_model.Incremental_learning(classes_learned)
 print('forgetting:', sum([max_accuracy[i] - accuracies[i] for i in range(args.n_tasks)]) / args.n_tasks)
