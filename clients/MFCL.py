@@ -47,7 +47,7 @@ class MFCL_client(AVG):
                 x_com, y_com = combine_data(((x, y), (x_replay, y_replay)))
                 logits_pen = model.feature(x_com)
                 logits = model.fc(logits_pen)
-                mappings = torch.ones(y_com.size(), dtype=torch.float32, device='cuda')
+                mappings = torch.ones(self.valid_dim, dtype=torch.float32, device='cuda') 
                 dw_cls = mappings[y_com.long()]
                 loss_class = self.criterion(logits[idx1, self.last_valid_dim:self.valid_dim], (y_com[idx1] - self.last_valid_dim), dw_cls[idx1])
                 with torch.no_grad():
