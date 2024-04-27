@@ -89,6 +89,7 @@ def start():
     parser.add_argument('--alpha', type=float, default=1, help='LDA parameter for data distribution')
     parser.add_argument('--n_tasks', type=int, default=10, help='#tasks')
     parser.add_argument('--syn_size', type=int, default=128, help='size of mini-batch')
+    parser.add_argument('--server_ss', type=int, default=128, help='batch size for genrative training')
     parser.add_argument('--pi', type=int, default=100, help='local epochs of each global round')
     parser.add_argument('--generator_lr', type=float, default=0.001)
     parser.add_argument('--z_dim', type=int, default=1000)
